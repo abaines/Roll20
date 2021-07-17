@@ -1,12 +1,12 @@
 /* jshint undef: true */
 /*
- globals
- state,
- sendChat,
- randomInteger,
- _,
- on
-*/
+globals
+state,
+sendChat,
+randomInteger,
+_,
+on
+ */
 
 var luckRecovery = luckRecovery || (function ()
 	{
@@ -165,9 +165,12 @@ var luckRecovery = luckRecovery || (function ()
 
 		log('luckRecovery object');
 
-		return {
+		let ret =
+		{
 			init: init
 		};
+
+		return ret;
 	}
 		());
 
