@@ -59,33 +59,29 @@ var luckRecovery = luckRecovery || (function ()
 			let luck2Roll = randomInteger(10);
 			let luck3Roll = randomInteger(10);
 
+			let luckPass = luck1Roll + 5;
+			let luckFail = luck1Roll + luck2Roll + 10;
+			let prefixMsg = '<br>Your starting luck is ' + currLuck + ".<br>You rolled a " + rolld100 + '. ';
+
 			let newLuck = currLuck;
 
 			if (rolld100 <= currLuck)
 			{
-				newLuck += luck1Roll + 5;
-			}
-			else
-			{
-				newLuck += luck1Roll + luck2Roll + 10;
-			}
 
-			let luckPass = luck1Roll + 5;
-			let luckFail = luck1Roll + luck2Roll + 10;
-			let prefixMsg = charName + ' - your current luck is ' + currLuck + ". You rolled a " + rolld100 + '. ';
-
-			if (rolld100 <= currLuck)
-			{
-				prefixMsg = prefixMsg + '<br> You succeeded on your Luck roll; therefore, you add ' + luckPass + ' to your current luck (1d10 + 5). ';
+				newLuck += luckPass;
+				prefixMsg = prefixMsg + '<br>You succeeded on your Luck roll; therefore, you add ' + luckPass + ' (1d10 + 5) to your current luck. ';
 				prefixMsg = prefixMsg + '<br>Your d10 roll was ' + luck1Roll + ".";
 			}
 			else
 			{
-				prefixMsg = prefixMsg + '<br> You failed on your Luck roll; therefore, you add ' + luckFail + ' to your current luck (2d10 + 10).';
+				newLuck += luckFail;
+				prefixMsg = prefixMsg + '<br>You failed on your Luck roll; therefore, you add ' + luckFail + ' (2d10 + 10) to your current luck.';
 				prefixMsg = prefixMsg + '<br>Your 2d10 rolls were ' + luck1Roll + " and " + luck2Roll + ".";
 			}
 
-			sendChat('Luck Recovery', prefixMsg);
+			prefixMsg += "<br>Your new luck value is " + newLuck + ".";
+
+			sendChat(charName + "\'s Luck Recovery", prefixMsg);
 		}
 
 		/**
@@ -110,7 +106,7 @@ var luckRecovery = luckRecovery || (function ()
 			// Single parameter that is numeric so set the roll value to the parameter and use the default fumble chart.
 			if (paramslen >= 2 && isNumeric(lastParam))
 			{
-				let currLuck = lastParam;
+				let currLuck = parseFloat(lastParam);
 
 				showNewLuck(charName, currLuck);
 			}
