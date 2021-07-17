@@ -28,7 +28,7 @@ var luckRecovery = luckRecovery || (function ()
 			{
 				charName = charName + ' ' + inputParams[i];
 			}
-			return charName;
+			return charName.trim();
 		}
 
 		/**
@@ -50,8 +50,26 @@ var luckRecovery = luckRecovery || (function ()
 		 * @param luck2Roll
 		 * @param newluck
 		 */
-		let showNewLuck = function (charName, currLuck, rolld100, luck1Roll, luck2Roll, newLuck)
+		let showNewLuck = function (charName, currLuck)
 		{
+			log("showNewLuck `" + charName + "` `" + currLuck + "`");
+
+			let rolld100 = randomInteger(100); // Default to a random roll.
+			let luck1Roll = randomInteger(10);
+			let luck2Roll = randomInteger(10);
+			let luck3Roll = randomInteger(10);
+
+			let newLuck = currLuck;
+
+			if (rolld100 <= currLuck)
+			{
+				newLuck += luck1Roll + 5;
+			}
+			else
+			{
+				newLuck += luck1Roll + luck2Roll + 10;
+			}
+
 			let luckPass = luck1Roll + 5;
 			let luckFail = luck1Roll + luck2Roll + 10;
 			let prefixMsg = charName + ' - your current luck is ' + currLuck + ". You rolled a " + rolld100 + '. ';
@@ -76,12 +94,7 @@ var luckRecovery = luckRecovery || (function ()
 		 */
 		let parseLuckRecovery = function (inputParams)
 		{
-			let rolld100 = randomInteger(100); // Default to a random roll.
-			let luck1Roll = randomInteger(10);
-			let luck2Roll = randomInteger(10);
 			let charName = getCharName(inputParams);
-			let currLuck = 0;
-			let newLuck = currLuck;
 
 			// No parameters so display the default chart and a random roll.
 			if (inputParams.length === 0)
@@ -93,18 +106,9 @@ var luckRecovery = luckRecovery || (function ()
 			// Single parameter that is numeric so set the roll value to the parameter and use the default fumble chart.
 			if (inputParams.length >= 2 && isNumeric(inputParams[inputParams.length - 1]))
 			{
-				currLuck = inputParams[inputParams.length - 1];
+				let currLuck = inputParams[inputParams.length - 1];
 
-				if (rolld100 <= currLuck)
-				{
-					newLuck += luck1Roll + 5;
-				}
-				else
-				{
-					newLuck += luck1Roll + luck2Roll + 10;
-				}
-
-				showNewLuck(charName, currLuck, rolld100, luck1Roll, luck2Roll, newLuck);
+				showNewLuck(charName, currLuck);
 			}
 			else
 			{
