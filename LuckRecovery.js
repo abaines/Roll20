@@ -96,23 +96,28 @@ var luckRecovery = luckRecovery || (function ()
 		{
 			let charName = getCharName(inputParams);
 
+			let paramslen = inputParams.length;
+
 			// No parameters so display the default chart and a random roll.
-			if (inputParams.length === 0)
+			if (paramslen === 0)
 			{
 				//showFumble(chart, rolled);
 				return;
 			}
 
+			let lastParam = inputParams[paramslen - 1];
+
 			// Single parameter that is numeric so set the roll value to the parameter and use the default fumble chart.
-			if (inputParams.length >= 2 && isNumeric(inputParams[inputParams.length - 1]))
+			if (paramslen >= 2 && isNumeric(lastParam))
 			{
-				let currLuck = inputParams[inputParams.length - 1];
+				let currLuck = lastParam;
 
 				showNewLuck(charName, currLuck);
 			}
 			else
 			{
-				sendChat('Luck Recovery', charName + ': Invalid parameters given, or something went wrong. GM take over.' + inputParams.length.toString() + ' ' + inputParams[inputParams.length - 1]);
+				let msg = charName + ': Invalid parameters given, or something went wrong. GM take over. ' + paramslen + ' ' + lastParam;
+				sendChat('Luck Recovery', msg);
 			}
 		}
 
