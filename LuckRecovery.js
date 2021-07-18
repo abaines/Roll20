@@ -83,9 +83,9 @@ var luckRecovery = luckRecovery || (function ()
 			prefixMsg += "<br>🎲 Your new luck value is <b>" + newLuck + "</b>.";
 
 			// lucky trait
-			prefixMsg = prefixMsg + '<br>If you have the luck trait, your d10 roll was ' + luck3Roll + ".";
+			prefixMsg = prefixMsg + '<br>If you have the Lucky Trait, your d10 roll was ' + luck3Roll + ".";
 			var luckyNewLuck = newLuck + luck3Roll;
-			prefixMsg += "<br>🍀 Your Luck Trait new luck is <b>" + luckyNewLuck + "</b>.";
+			prefixMsg += "<br>🍀 Your Lucky Trait new luck is <b>" + luckyNewLuck + "</b>.";
 
 			sendChat(charName + "\'s Luck Recovery", prefixMsg);
 		}
