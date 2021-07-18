@@ -88,6 +88,29 @@ var luckRecovery = luckRecovery || (function ()
 			prefixMsg += "<br>🍀 Your Lucky Trait new luck is <b>" + luckyNewLuck + "</b>.";
 
 			sendChat(charName + "\'s Luck Recovery", prefixMsg);
+
+			var c = filterObjs(function (obj)
+				{
+					//log(obj);
+					//log(typeof(obj));
+					var n = obj.get('name');
+					//log(n);
+					return n == charName;
+				}
+				)
+
+				log(c);
+
+			//var npcs = findObjs({ type: 'character', name:charName });
+			//log(npcs);
+
+			var strength = getAttrByName("-MeqKF0EJN-dKznWGIYK", 'charm');
+			log(strength);
+
+			var charm_checkbox = getAttrByName("-MeqKF0EJN-dKznWGIYK", 'charm_checkbox');
+			log(charm_checkbox);
+
+			charm_checkbox = "0";
 		}
 
 		/**
