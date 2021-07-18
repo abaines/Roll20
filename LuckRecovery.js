@@ -61,25 +61,31 @@ var luckRecovery = luckRecovery || (function ()
 
 			let luckPass = luck1Roll + 5;
 			let luckFail = luck1Roll + luck2Roll + 10;
-			let prefixMsg = '<br>Your starting luck is ' + currLuck + ".<br>You rolled a " + rolld100 + '. ';
+
+			let prefixMsg = '<br>Your starting luck is ' + currLuck + ".";
+			prefixMsg += "<br>You rolled a " + rolld100 + '.';
 
 			let newLuck = currLuck;
 
 			if (rolld100 <= currLuck)
 			{
-
 				newLuck += luckPass;
-				prefixMsg = prefixMsg + '<br>You succeeded on your Luck roll; therefore, you add ' + luckPass + ' (1d10 + 5) to your current luck. ';
+				prefixMsg = prefixMsg + '<br>💔 You succeeded on your Luck roll;<br> ∴ you add ' + luckPass + ' (1d10 + 5) to your current luck. ';
 				prefixMsg = prefixMsg + '<br>Your d10 roll was ' + luck1Roll + ".";
 			}
 			else
 			{
 				newLuck += luckFail;
-				prefixMsg = prefixMsg + '<br>You failed on your Luck roll; therefore, you add ' + luckFail + ' (2d10 + 10) to your current luck.';
+				prefixMsg = prefixMsg + '<br>🧡 You failed on your Luck roll;<br> ∴ you add ' + luckFail + ' (2d10 + 10) to your current luck.';
 				prefixMsg = prefixMsg + '<br>Your 2d10 rolls were ' + luck1Roll + " and " + luck2Roll + ".";
 			}
 
-			prefixMsg += "<br>Your new luck value is " + newLuck + ".";
+			prefixMsg += "<br>🎲 Your new luck value is <b>" + newLuck + "</b>.";
+
+			// lucky trait
+			prefixMsg = prefixMsg + '<br>If you have the luck trait, your d10 roll was ' + luck3Roll + ".";
+			var luckyNewLuck = newLuck + luck3Roll;
+			prefixMsg += "<br>🍀 Your Luck Trait new luck is <b>" + luckyNewLuck + "</b>.";
 
 			sendChat(charName + "\'s Luck Recovery", prefixMsg);
 		}
