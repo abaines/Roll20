@@ -70,13 +70,13 @@ var luckRecovery = luckRecovery || (function ()
 			if (rolld100 <= currLuck)
 			{
 				newLuck += luckPass;
-				prefixMsg = prefixMsg + '<br>💔 You succeeded on your Luck roll;<br> ∴ you add ' + luckPass + ' (1d10 + 5) to your current luck. ';
+				prefixMsg = prefixMsg + '<br>👎 You succeeded on your Luck roll;<br> ∴ you add ' + luckPass + ' (1d10 + 5) to your current luck. ';
 				prefixMsg = prefixMsg + '<br>Your d10 roll was ' + luck1Roll + ".";
 			}
 			else
 			{
 				newLuck += luckFail;
-				prefixMsg = prefixMsg + '<br>🧡 You failed on your Luck roll;<br> ∴ you add ' + luckFail + ' (2d10 + 10) to your current luck.';
+				prefixMsg = prefixMsg + '<br>👍 You failed on your Luck roll;<br> ∴ you add ' + luckFail + ' (2d10 + 10) to your current luck.';
 				prefixMsg = prefixMsg + '<br>Your 2d10 rolls were ' + luck1Roll + " and " + luck2Roll + ".";
 			}
 
